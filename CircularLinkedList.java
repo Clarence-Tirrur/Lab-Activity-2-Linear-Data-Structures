@@ -1,51 +1,48 @@
 public class CircularLinkedList {
-    Node head = null;
-    Node tail = null;
+    private Node headNode = null;
+    private Node tailNode = null;
 
-    public void insert(int data) {
-        Node newNode = new Node(data);
+    public void insert(int newValue) {
+        Node newNode = new Node(newValue);
 
-        if (head == null) { 
-            head = newNode;
-            tail = newNode;
-            newNode.next = head;   
+        if (headNode == null) {
+            headNode = newNode;
+            tailNode = newNode;
+            newNode.nextNode = headNode;
         } else {
-            tail.next = newNode;   
-            tail = newNode;       
-            tail.next = head;      
+            tailNode.nextNode = newNode;
+            newNode.nextNode = headNode;
+            tailNode = newNode;
         }
     }
 
     public void delete() {
-        if (head == null) {
-            System.out.println("Circular list is empty, nothing to delete.\n");
+        if (headNode == null) {
+            System.out.println("Circular linked list is empty.");
             return;
         }
 
-        if (head == tail) { /
-            head = null;
-            tail = null;
+        if (headNode == tailNode) {
+            headNode = null;
+            tailNode = null;
         } else {
-            head = head.next;      
-            tail.next = head;      
+            headNode = headNode.nextNode;
+            tailNode.nextNode = headNode;
         }
-
-        System.out.println("Deleted node...\n");
     }
 
     public void display() {
-        if (head == null) {
-            System.out.println("Circular list is empty.\n");
+        if (headNode == null) {
+            System.out.println("Circular linked list is empty.");
             return;
         }
 
-        Node current = head;
-        System.out.print("Circular Linked List: ");
+        Node currentNode = headNode;
         do {
-            System.out.print(current.data + " ");
-            current = current.next;
-        } while (current != head);  
+            System.out.print(currentNode.dataValue + " ");
+            currentNode = currentNode.nextNode;
+        } while (currentNode != headNode);
 
-        System.out.println("\n");
+        System.out.println();
     }
 }
